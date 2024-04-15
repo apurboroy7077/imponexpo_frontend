@@ -4,7 +4,7 @@ import React from "react";
 const Navbar2 = () => {
   return (
     <nav className="max-w-full ">
-      <div className=" bg-[#333333] px-5 py-2  flex items-center justify-center text-nowrap">
+      <div className=" bg-[#333333] px-5 py-2 lg:py-5  flex items-center justify-center text-nowrap">
         <div className="w-full max-w-[100rem]">
           <div className="">
             <ul className="flex justify-between  items-center">

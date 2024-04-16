@@ -147,6 +147,20 @@ const TrendingProducts = () => {
               );
             })}
           </div>
+          <div className="my-5">
+            <div className="flex items-center gap-1 justify-center">
+              <div className="text-[#ff603d] text-center font-bold md:text-lg">
+                See more Channels
+              </div>
+              <div>
+                <img
+                  className="w-[1.1rem]"
+                  src="/icons/arrow-down-orange.svg"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -3,7 +3,7 @@ import React from "react";
 
 const Navbar2 = () => {
   return (
-    <nav className="max-w-full ">
+    <nav className="hidden md:block">
       <div className=" bg-[#333333] px-5 py-2 lg:py-5  flex items-center justify-center text-nowrap">
         <div className="w-full max-w-[100rem]">
           <div className="">
@@ -188,6 +188,28 @@ const Navbar2 = () => {
               </li>
             </ul>
           </div>
+          <hr className="mt-5" />
+        </div>
+      </div>
+
+      <div className=" px-5 py-2 lg:py-5   flex items-center justify-center">
+        <div className="w-full max-w-[100rem] ">
+          <div>
+            <ul className="flex justify-between items-center">
+              <li className="flex items-center gap-2 pr-2 ">
+                <div>
+                  <img className="w-[1.5rem]" src="/icons/list.svg" alt="" />
+                </div>
+                <div className="text-sm">Categories</div>
+              </li>
+              <li>
+                <button className="text-sm text-[#ff603d] border-[#ff603d] rounded-lg border-[1px] px-3 py-1">
+                  Request for quotation
+                </button>
+              </li>
+            </ul>
+          </div>
+          <hr className="mt-5" />
         </div>
       </div>
     </nav>

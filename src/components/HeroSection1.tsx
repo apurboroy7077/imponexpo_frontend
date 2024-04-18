@@ -14,7 +14,7 @@ const HeroSection1 = () => {
               <div className="text-white text-xl md:text-2xl lg:text-5xl font-bold">
                 Smart Wearable
               </div>
-              <div className="bg-[#feeb47] text-[#1d5ec9] w-fit px-3 text-sm md:text-base lg:text-lg font-bold py-1">
+              <div className="bg-[#feeb47] transition-transform hover:scale-[1.02]  text-[#1d5ec9] w-fit px-3 text-sm md:text-base lg:text-lg font-bold py-1 cursor-pointer">
                 UP to 80% OFF
               </div>
             </div>

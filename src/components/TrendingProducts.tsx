@@ -40,7 +40,7 @@ const TrendingProducts = () => {
 
                     <div>
                       <div className="text-[0.5rem]">
-                        <button className="border-[black] border-[1px] rounded px-4 py-[0.15rem] font-medium">
+                        <button className="border-[black] border-[1px] rounded px-4 py-[0.15rem] hover:bg-[black] hover:text-[white] font-medium active:scale-[0.99]">
                           Follow
                         </button>
                       </div>
@@ -51,7 +51,7 @@ const TrendingProducts = () => {
                   </div>
                   <div>
                     <div className="text-center">
-                      <button className="text-[0.5rem] font-bold bg-black text-white px-3 py-1 rounded">
+                      <button className=" text-[0.5rem] font-bold bg-black text-white px-3 py-1 rounded hover:scale-[1.05]">
                         Contact Supplier
                       </button>
                     </div>
@@ -68,7 +68,7 @@ const TrendingProducts = () => {
                       <div className="flex flex-col items-center">
                         <div>
                           <img
-                            className="w-[1.5rem]"
+                            className="w-[1.5rem] hover:scale-[1.05]"
                             src="/icons/love.svg"
                             alt=""
                           />
@@ -80,7 +80,7 @@ const TrendingProducts = () => {
                       <div className="flex flex-col items-center">
                         <div>
                           <img
-                            className="w-[1.5rem]"
+                            className="w-[1.5rem] hover:scale-[1.05]"
                             src="/icons/message.svg"
                             alt=""
                           />
@@ -92,7 +92,7 @@ const TrendingProducts = () => {
                       <div className="flex flex-col items-center">
                         <div>
                           <img
-                            className="w-[1.5rem]"
+                            className="w-[1.5rem] hover:scale-[1.05]"
                             src="/icons/share.svg"
                             alt=""
                           />
@@ -104,7 +104,7 @@ const TrendingProducts = () => {
                       <div className="flex flex-col items-center">
                         <div>
                           <img
-                            className="w-[1.5rem]"
+                            className="w-[1.5rem] hover:scale-[1.05]"
                             src="/icons/love.svg"
                             alt=""
                           />
@@ -132,12 +132,12 @@ const TrendingProducts = () => {
                     </div>
                     <div className="flex items-center justify-between mt-4 mb-2">
                       <div>
-                        <button className=" font-sans text-sm bg-[#1d5dc7] border-[#1d5dc7] border-[1.5px] px-3 py-2 rounded text-white">
+                        <button className=" font-sans text-sm bg-[#1d5dc7] border-[#1d5dc7] border-[1.5px] px-3 py-2 rounded text-white hover:scale-[1.02] active:scale-[0.97]">
                           Make an Order
                         </button>
                       </div>
                       <div>
-                        <button className=" font-sans text-sm border-[#1d5dc7] text-[#1d5dc7] border-[1.5px] px-3 py-2 rounded">
+                        <button className=" font-sans text-sm border-[#1d5dc7] text-[#1d5dc7] border-[1.5px] px-3 py-2 rounded hover:scale-[1.02] active:scale-[0.97]">
                           Group import
                         </button>
                       </div>

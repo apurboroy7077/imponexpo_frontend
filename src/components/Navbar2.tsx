@@ -166,7 +166,7 @@ const Navbar2 = () => {
               <li>
                 <ul>
                   <li className="flex  items-center gap-2">
-                    <button className="flex gap-1 items-center">
+                    <button className="flex gap-1 items-center transition-all hover:scale-105 active:scale-100">
                       <span>
                         <img
                           className="w-[1rem] lg:w-[1.2rem]"
@@ -174,11 +174,11 @@ const Navbar2 = () => {
                           alt=""
                         />
                       </span>
-                      <span className="font-bold text-[#1d5ec9] text-xs lg:text-base">
+                      <span className="font-bold  text-[#1d5ec9] text-xs lg:text-base">
                         Login
                       </span>
                     </button>
-                    <button className="flex items-center border-[#1d5ec9] border-[1px] px-2 lg:px-4 py-[1px]  rounded-xl ">
+                    <button className="flex items-center border-[#1d5ec9] border-[1px] px-2 lg:px-4 py-[1px]  rounded-xl transition-all hover:scale-105 active:scale-100">
                       <span className=" text-[#1d5ec9] text-xs lg:text-base">
                         Register
                       </span>

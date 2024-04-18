@@ -147,6 +147,7 @@ const TrendingProducts = () => {
               );
             })}
           </div>
+
           <div className="my-5">
             <div className="flex items-center gap-1 justify-center">
               <div className="text-[#ff603d] text-center font-bold md:text-lg">

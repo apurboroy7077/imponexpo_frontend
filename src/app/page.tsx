@@ -4,6 +4,7 @@ import MixedSection1 from "@/components/MixedSection1";
 import Navbar1 from "@/components/Navbar1";
 import Navbar2 from "@/components/Navbar2";
 import PeopleAndBusinessTrending from "@/components/PeopleAndBusinessTrending";
+import ProductsCategoryOnImponexpo from "@/components/ProductsCategoryOnImponexpo";
 import TrendingDeals from "@/components/TrendingDeals";
 import TrendingHashtags from "@/components/TrendingHashtags";
 import TrendingOnReadyMate from "@/components/TrendingOnReadyMate";
@@ -22,6 +23,7 @@ export default function Home() {
       <TrendingOnReadyMate />
       <MixedSection1 />
       <TrendingDeals />
+      <ProductsCategoryOnImponexpo />
     </>
   );
 }

@@ -5,6 +5,7 @@ import MixedSection1 from "@/components/MixedSection1";
 import Navbar1 from "@/components/Navbar1";
 import Navbar2 from "@/components/Navbar2";
 import PeopleAndBusinessTrending from "@/components/PeopleAndBusinessTrending";
+import PeopleReviewSection from "@/components/PeopleReviewSection";
 import ProductsCategoryOnImponexpo from "@/components/ProductsCategoryOnImponexpo";
 import SourceByRegionSection from "@/components/SourceByRegionSection";
 import TrendingDeals from "@/components/TrendingDeals";
@@ -28,6 +29,7 @@ export default function Home() {
       <ProductsCategoryOnImponexpo />
       <ImporterCentricToolSection />
       <SourceByRegionSection />
+      <PeopleReviewSection />
     </>
   );
 }

@@ -1,4 +1,6 @@
 import ExclusiveOfferSection from "@/components/ExclusiveOfferSection";
+import Footer1 from "@/components/Footer1";
+import Footer2 from "@/components/Footer2";
 import HeroSection1 from "@/components/HeroSection1";
 import ImporterCentricToolSection from "@/components/ImporterCentricToolSection";
 import LiveTrends from "@/components/LiveTrends";
@@ -34,6 +36,8 @@ export default function Home() {
       <PeopleReviewSection />
       <PersonalizedSourcing />
       <ExclusiveOfferSection />
+      <Footer1 />
+      <Footer2 />
     </>
   );
 }

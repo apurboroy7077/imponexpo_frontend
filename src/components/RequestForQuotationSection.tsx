@@ -77,10 +77,33 @@ const RequestForQuotationSection = () => {
                     <div className="text-sm">Upload Photos</div>
                   </div>
                   <div>
-                    <input
-                      type="file"
-                      className="mt-2 rounded-xl py-2 px-2 w-full border-[#1c1c1c] border-[1px]"
-                    />
+                    <div className="border-[2px] py-5 border-[#b1bfd0] border-dashed mt-3 ">
+                      <div>
+                        <input
+                          type="file"
+                          className="hidden mt-2 rounded-xl py-2 px-2 w-full border-[#1c1c1c] border-[1px]"
+                        />
+                      </div>
+                      <div>
+                        <div className="flex justify-center">
+                          <img
+                            className="w-[50%] md:w-[30%] lg:w-[10%]"
+                            src="/icons/images.svg"
+                            alt=""
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <div className=" text-sm text-center font-medium mt-2">
+                          Drop your images here, or browse
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-[#969db2] text-center text-xs mt-2">
+                          Supports PNG, JPG, JPEG, WEBP
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

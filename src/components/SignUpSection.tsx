@@ -43,7 +43,7 @@ const SignUpSection = () => {
             </div>
             <div className="md:w-[40%] ">
               <div className="md:bg-[white] rounded-xl md:rounded-tl-none md:rounded-bl-none flex justify-center">
-                <div className=" bg-[white] md:my-10  border-[#00baf2] rounded-lg  border-[1px] px-3 md:mx-5 py-3 lg:pb-7 ">
+                <div className=" bg-[white] md:my-10  border-[#00baf2] rounded-lg  border-[1px] px-3 lg:px-7 md:mx-5 py-3 lg:py-7 lg:pb-9 ">
                   <div>
                     <div className="flex justify-between items-center">
                       <div>

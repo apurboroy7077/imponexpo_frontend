@@ -24,7 +24,7 @@ const ResetPasswordSection = () => {
           </div>
           <div>
             <div className="text-sm md:text-lg  text-[#2d3840] mt-3 md:mt-7 text-center font-medium">
-              Let's Help You
+              Let&apos;s Help You
               <span className="text-[#1d5dc7] font-bold">
                 {" "}
                 Retrieve Password

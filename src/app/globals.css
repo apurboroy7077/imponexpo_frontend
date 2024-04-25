@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.scrollbar-1 {
+  scrollbar-width: none;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+.scrollbar-2 {
+  scrollbar-color: #404040 transparent;
+}

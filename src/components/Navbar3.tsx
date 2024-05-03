@@ -3,7 +3,7 @@ import React from "react";
 
 const Navbar3 = () => {
   return (
-    <nav className="hidden md:block">
+    <nav className="hidden md:block border-b-[2px]">
       <div className=" bg-[#333333]  py-2 lg:py-5  flex items-center justify-center text-nowrap">
         <div className="w-full px-5 lg:px-10 max-w-[90rem]">
           <div className="">
@@ -209,7 +209,7 @@ const Navbar3 = () => {
               </li>
             </ul>
           </div>
-          <hr className="mt-5" />
+          {/* <hr className="mt-5" /> */}
         </div>
       </div>
     </nav>

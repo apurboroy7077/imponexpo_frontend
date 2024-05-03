@@ -12,13 +12,13 @@ const page = () => {
   return (
     <>
       <Navbar3 />
-      <div className=" bg-[#e5e5e5]">
+      <main className=" bg-[#e5e5e5]">
         <OrderingProcedure />
         <CompanyDetailsSection />
         <ProductsDetailsSection />
         <ProductsDetailsSection2 />
         <RelatedProductsSection />
-      </div>
+      </main>
       <Footer3 />
     </>
   );

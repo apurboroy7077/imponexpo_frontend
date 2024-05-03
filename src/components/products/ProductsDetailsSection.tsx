@@ -5,7 +5,7 @@ const ProductsDetailsSection = () => {
   return (
     <section>
       <div className=" px-2 py-5 lg:py-7   flex items-center justify-center">
-        <div className="w-full max-w-[90rem] bg-[white] px-5  lg:px-10 py-16 rounded-lg">
+        <div className="w-full max-w-[100rem] bg-[white] px-5  lg:px-10 py-16 rounded-lg">
           <div className="flex flex-col lg:flex-row gap-7">
             <div className="lg:min-w-[65%] lg:max-w-[65%]">
               <div className="flex justify-between">

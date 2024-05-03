@@ -5,7 +5,7 @@ const Footer3 = () => {
     <>
       <footer>
         <div className=" px-2 py-7 lg:py-16  border-t-[2px]  flex items-center justify-center">
-          <div className="w-full max-w-[90rem] ">
+          <div className="w-full max-w-[100rem] ">
             <div>
               <div className="md:px-[3rem] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
                 {Array.from({ length: 5 }).map(() => {

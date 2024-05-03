@@ -4,7 +4,7 @@ const ProductsDetailsSection2 = () => {
   return (
     <section>
       <div className=" px-2 py-5 lg:py-7   flex items-center justify-center">
-        <div className="w-full max-w-[90rem] bg-[white] px-5  lg:px-10 py-16 rounded-lg">
+        <div className="w-full max-w-[100rem] bg-[white] px-5  lg:px-10 py-16 rounded-lg">
           <div className="lg:hidden">
             <div className="lg:hidden">
               <div className="text-[#0d6efd] font-bold ">Product Details</div>

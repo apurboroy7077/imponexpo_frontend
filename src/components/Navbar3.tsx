@@ -5,7 +5,7 @@ const Navbar3 = () => {
   return (
     <nav className="hidden md:block border-b-[2px]">
       <div className=" bg-[#333333]  py-2 lg:py-5  flex items-center justify-center text-nowrap">
-        <div className="w-full px-5 lg:px-10 max-w-[90rem]">
+        <div className="w-full px-5 lg:px-10 max-w-[100rem]">
           <div className="">
             <ul className="flex justify-between  items-center">
               <li className="">
@@ -59,7 +59,7 @@ const Navbar3 = () => {
         </div>
       </div>
       <div className="  py-2 lg:py-5   flex items-center justify-center">
-        <div className="w-full max-w-[90rem] px-5 lg:px-10">
+        <div className="w-full max-w-[100rem] px-5 lg:px-10">
           <div>
             <ul className="flex justify-between items-center">
               <li>
@@ -193,7 +193,7 @@ const Navbar3 = () => {
       </div>
 
       <div className="  py-2 lg:py-5   flex items-center justify-center">
-        <div className="w-full max-w-[90rem] px-5 lg:px-10">
+        <div className="w-full max-w-[100rem] px-5 lg:px-10">
           <div>
             <ul className="flex justify-between items-center">
               <li className="flex items-center gap-2 pr-2 ">

@@ -9,3 +9,8 @@
 .scrollbar-2 {
   scrollbar-color: #404040 transparent;
 }
+@media (min-width: 1024px) {
+  .box-shadow-style-1-lg {
+    box-shadow: 2px 2px 10px black;
+  }
+}

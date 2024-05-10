@@ -1,8 +1,12 @@
 import React from "react";
-// import AuthenticateUser from "./AuthenticateUser";
+import AuthenticateUser from "./AuthenticateUser";
 
 const AllStartupFunctions = () => {
-  return <>{/* <AuthenticateUser /> */}</>;
+  return (
+    <>
+      <AuthenticateUser />
+    </>
+  );
 };
 
 export default AllStartupFunctions;

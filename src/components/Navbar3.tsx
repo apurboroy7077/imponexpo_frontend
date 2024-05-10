@@ -212,6 +212,11 @@ const Navbar3 = () => {
                           {userData?.userFullName}
                         </span>
                       </button>
+                      <button className="flex items-center border-[#1d5ec9] border-[1px] px-2 lg:px-4 py-[1px]  rounded-xl transition-all hover:scale-105 active:scale-100">
+                        <span className=" text-[#1d5ec9] text-xs lg:text-base">
+                          Logout
+                        </span>
+                      </button>
                     </li>
                   </ul>
                 )}

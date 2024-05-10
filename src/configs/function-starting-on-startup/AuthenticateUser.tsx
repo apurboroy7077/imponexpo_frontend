@@ -6,8 +6,12 @@ import {
 } from "@/data/EnvironmentVariables";
 import axios from "axios";
 import React, { useEffect } from "react";
+import { useUser } from "../zustand/zustandUser";
+import { userDataForClientSideType } from "../types/types";
+import { toast } from "react-toastify";
 
 const AuthenticateUser = () => {
+  const markUserAsLoggedIn = useUser((state) => state.markUserAsLoggedIn);
   useEffect(() => {
     const authenticationToken = localStorage.getItem(
       KEYNAME_OF_AUTHENTICATION_TOKEN_IN_LOCALSTORAGE
@@ -18,7 +22,10 @@ const AuthenticateUser = () => {
           authenticationToken,
         })
         .then((response) => {
-          console.log(response);
+          const userData = response.data.userData as userDataForClientSideType;
+          const userFullName = userData.userFullName;
+          markUserAsLoggedIn(userData);
+          toast(`Welcome ${userFullName}!`);
         })
         .catch((error) => {
           console.log(error);
@@ -29,7 +36,7 @@ const AuthenticateUser = () => {
     }
   }, []);
 
-  return <>test</>;
+  return <></>;
 };
 
 export default AuthenticateUser;

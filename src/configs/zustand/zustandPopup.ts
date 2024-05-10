@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { create } from "zustand";
 type currentlyOpenedPopupType = "NO_POPUP" | "LOGOUT_POPUP";
 type usePopupType = {
@@ -17,6 +18,7 @@ const usePopup = create<usePopupType>((set) => ({
   },
   closePopup: () => {
     set((state) => {
+      toast("Logout Successful");
       return { ...state, currentlyOpenedPopup: "NO_POPUP" };
     });
   },

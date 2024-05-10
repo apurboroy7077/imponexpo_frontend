@@ -6,12 +6,15 @@ import {
 } from "@/data/EnvironmentVariables";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import React, { use } from "react";
+import React, { use, useState } from "react";
 import { toast } from "react-toastify";
-type signUpStatusType = "INCOMPLETE" | "FAILED" | "SUCCESSFUL" | "ONGOING";
+type signInStatusType = "INCOMPLETE" | "FAILED" | "SUCCESSFUL" | "ONGOING";
 
 const SignInForm = () => {
   const router = useRouter();
+  const [signInStatus, setSignInStatus] = useState(
+    "INCOMPLETE" as signInStatusType
+  );
   const markUserAsLoggedIn = useUser((state) => state.markUserAsLoggedIn);
   const handleSignIn = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,6 +25,7 @@ const SignInForm = () => {
       userEmail,
       password,
     };
+    setSignInStatus("ONGOING");
     axios
       .post(`${serverURL}/authentication/sign-in`, dataForServer)
       .then((response) => {
@@ -35,14 +39,17 @@ const SignInForm = () => {
           authenticationToken
         );
         markUserAsLoggedIn(userData);
+        setSignInStatus("SUCCESSFUL");
         router.push("/");
       })
       .catch((error) => {
         console.log(error);
         const serverMessage = error.response.data;
         toast(serverMessage);
+        setSignInStatus("FAILED");
       });
   };
+
   return (
     <form onSubmit={handleSignIn}>
       <div>
@@ -139,17 +146,29 @@ const SignInForm = () => {
       </div>
       <div>
         <div className="relative mt-5 md:mt-9 text-sm font-medium">
-          <button
-            className=" md:text-lg w-full py-2 rounded-lg bg-[#255c89] text-[white] hover:scale-[1.01] active:scale-[1]"
-            type="submit"
-          >
-            Sign In{" "}
-            <img
-              className="w-[1rem] inline"
-              src="/icons/circle-right-regular-2.svg"
-              alt=""
-            />
-          </button>
+          {(signInStatus === "INCOMPLETE" || signInStatus === "FAILED") && (
+            <button
+              className=" md:text-lg w-full py-2 rounded-lg bg-[#255c89] text-[white] hover:scale-[1.01] active:scale-[1]"
+              type="submit"
+            >
+              Sign In{" "}
+              <img
+                className="w-[1rem] inline"
+                src="/icons/circle-right-regular-2.svg"
+                alt=""
+              />
+            </button>
+          )}
+          {signInStatus === "ONGOING" && (
+            <button className=" md:text-lg w-full py-2 rounded-lg bg-[#255c89] text-[white] hover:scale-[1.01] active:scale-[1]">
+              Signing In{" "}
+              <img
+                className="w-[1rem] animate-spin inline"
+                src="/icons/sector-2/spinner-solid-white.svg"
+                alt=""
+              />
+            </button>
+          )}
         </div>
       </div>
       <div>

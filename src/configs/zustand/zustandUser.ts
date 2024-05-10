@@ -1,0 +1,32 @@
+import { create } from "zustand";
+import { userDataForClientSideType } from "../types/types";
+type useUserType = {
+  loginStatus: "NOT_LOGGED_IN" | "LOGGED_IN";
+  userData: null | userDataForClientSideType;
+  markUserAsLoggedIn: (userData: userDataForClientSideType) => void;
+  markUserAsNotLoggedIn: () => void;
+};
+const useUser = create<useUserType>((set) => ({
+  loginStatus: "NOT_LOGGED_IN",
+  userData: null,
+  markUserAsLoggedIn: (userData: userDataForClientSideType) => {
+    set((state) => {
+      return {
+        ...state,
+        loginStatus: "LOGGED_IN",
+        userData: userData,
+      };
+    });
+  },
+  markUserAsNotLoggedIn: () => {
+    set((state) => {
+      return {
+        ...state,
+        loginStatus: "NOT_LOGGED_IN",
+        userData: null,
+      };
+    });
+  },
+}));
+
+export { useUser };

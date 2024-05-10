@@ -1,7 +1,11 @@
+"use client";
+import { useUser } from "@/configs/zustand/zustandUser";
 import Link from "next/link";
 import React from "react";
 
 const Navbar3 = () => {
+  const loginStatus = useUser((state) => state.loginStatus);
+  const userData = useUser((state) => state.userData);
   return (
     <nav className="hidden md:block border-b-[2px]">
       <div className=" bg-[#333333]  py-2 lg:py-5  flex items-center justify-center text-nowrap">
@@ -63,11 +67,13 @@ const Navbar3 = () => {
           <div>
             <ul className="flex justify-between items-center">
               <li>
-                <img
-                  className="w-[5rem] lg:w-[7rem]"
-                  src="icons/demo-logo.svg"
-                  alt=""
-                />
+                <Link href={"/"}>
+                  <img
+                    className="w-[5rem] lg:w-[7rem] active:scale-[0.95]"
+                    src="icons/demo-logo.svg"
+                    alt=""
+                  />
+                </Link>
               </li>
               <li>
                 <ul className="flex items-center">
@@ -164,27 +170,51 @@ const Navbar3 = () => {
                 </ul>
               </li>
               <li>
-                <ul>
-                  <li className="flex  items-center gap-2">
-                    <button className="flex gap-1 items-center transition-all hover:scale-105 active:scale-100">
-                      <span>
-                        <img
-                          className="w-[1rem] lg:w-[1.2rem]"
-                          src="/icons/user.svg"
-                          alt=""
-                        />
-                      </span>
-                      <span className="font-bold  text-[#1d5ec9] text-xs lg:text-base">
-                        Login
-                      </span>
-                    </button>
-                    <button className="flex items-center border-[#1d5ec9] border-[1px] px-2 lg:px-4 py-[1px]  rounded-xl transition-all hover:scale-105 active:scale-100">
-                      <span className=" text-[#1d5ec9] text-xs lg:text-base">
-                        Register
-                      </span>
-                    </button>
-                  </li>
-                </ul>
+                {loginStatus === "NOT_LOGGED_IN" && (
+                  <ul>
+                    <li className="flex  items-center gap-2">
+                      <Link href={"/sign-in"}>
+                        <button className="flex gap-1 items-center transition-all hover:scale-105 active:scale-100">
+                          <span>
+                            <img
+                              className="w-[1rem] lg:w-[1.2rem]"
+                              src="/icons/user.svg"
+                              alt=""
+                            />
+                          </span>
+                          <span className="font-bold  text-[#1d5ec9] text-xs lg:text-base">
+                            Login
+                          </span>
+                        </button>
+                      </Link>
+                      <Link href={"/sign-up"}>
+                        <button className="flex items-center border-[#1d5ec9] border-[1px] px-2 lg:px-4 py-[1px]  rounded-xl transition-all hover:scale-105 active:scale-100">
+                          <span className=" text-[#1d5ec9] text-xs lg:text-base">
+                            Register
+                          </span>
+                        </button>
+                      </Link>
+                    </li>
+                  </ul>
+                )}
+                {loginStatus === "LOGGED_IN" && (
+                  <ul>
+                    <li className="flex  items-center gap-2">
+                      <button className="flex gap-1 items-center transition-all hover:scale-105 active:scale-100">
+                        <span>
+                          <img
+                            className="w-[1rem] lg:w-[1.2rem]"
+                            src="/icons/user.svg"
+                            alt=""
+                          />
+                        </span>
+                        <span className="font-bold  text-[#1d5ec9] text-xs lg:text-base">
+                          {userData?.userFullName}
+                        </span>
+                      </button>
+                    </li>
+                  </ul>
+                )}
               </li>
             </ul>
           </div>

@@ -8,23 +8,22 @@ import axios from "axios";
 import React, { useEffect } from "react";
 
 const AuthenticateUser = () => {
-  const authenticationToken = localStorage.getItem(
-    KEYNAME_OF_AUTHENTICATION_TOKEN_IN_LOCALSTORAGE
-  );
-  const authenticateUserFunction = () => {
-    axios
-      .post(`${serverURL}${AUTHENTICATE_USER_WITH_TOKEN_SUB_URL}`, {
-        authenticationToken,
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   useEffect(() => {
+    const authenticationToken = localStorage.getItem(
+      KEYNAME_OF_AUTHENTICATION_TOKEN_IN_LOCALSTORAGE
+    );
+    const authenticateUserFunction = () => {
+      axios
+        .post(`${serverURL}${AUTHENTICATE_USER_WITH_TOKEN_SUB_URL}`, {
+          authenticationToken,
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
     if (authenticationToken) {
       authenticateUserFunction();
     }

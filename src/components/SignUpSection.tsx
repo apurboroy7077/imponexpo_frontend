@@ -1,5 +1,5 @@
 import TheSection from "./TheSection";
-import SignUpForm from "./sign-up/SignUpForm";
+// import SignUpForm from "./sign-up/SignUpForm";
 
 const SignUpSection = () => {
   return (
@@ -42,7 +42,7 @@ const SignUpSection = () => {
                 </div>
               </div>
             </div>
-            <SignUpForm />
+            {/* <SignUpForm /> */}
           </div>
         </div>
       </div>

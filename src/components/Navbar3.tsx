@@ -1,4 +1,5 @@
 "use client";
+import { usePopup } from "@/configs/zustand/zustandPopup";
 import { useUser } from "@/configs/zustand/zustandUser";
 import Link from "next/link";
 import React from "react";
@@ -6,6 +7,7 @@ import React from "react";
 const Navbar3 = () => {
   const loginStatus = useUser((state) => state.loginStatus);
   const userData = useUser((state) => state.userData);
+  const openPopup = usePopup((state) => state.openPopup);
   return (
     <nav className="hidden md:block border-b-[2px]">
       <div className=" bg-[#333333]  py-2 lg:py-5  flex items-center justify-center text-nowrap">
@@ -212,7 +214,12 @@ const Navbar3 = () => {
                           {userData?.userFullName}
                         </span>
                       </button>
-                      <button className="flex items-center border-[#1d5ec9] border-[1px] px-2 lg:px-4 py-[1px]  rounded-xl transition-all hover:scale-105 active:scale-100">
+                      <button
+                        className="flex items-center border-[#1d5ec9] border-[1px] px-2 lg:px-4 py-[1px]  rounded-xl transition-all hover:scale-105 active:scale-100"
+                        onClick={() => {
+                          openPopup("LOGOUT_POPUP");
+                        }}
+                      >
                         <span className=" text-[#1d5ec9] text-xs lg:text-base">
                           Logout
                         </span>

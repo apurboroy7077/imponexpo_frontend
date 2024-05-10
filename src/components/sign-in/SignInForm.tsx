@@ -8,6 +8,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { use } from "react";
 import { toast } from "react-toastify";
+type signUpStatusType = "INCOMPLETE" | "FAILED" | "SUCCESSFUL" | "ONGOING";
 
 const SignInForm = () => {
   const router = useRouter();

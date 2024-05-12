@@ -9,4 +9,21 @@ type userDataForClientSideType = {
   reasonForSignup: string;
   imponexpoAccountURL: string;
 };
-export type { userDataForClientSideType };
+type productDataType = {
+  ar7id: string;
+  inStock: boolean;
+  mainImageUrl: string;
+  minimumQuantityToOrder: string;
+  price: string;
+  priceType: string;
+  productCategory: string;
+  productDescription: string;
+  productHashtags: string;
+  productName: string;
+  productOrigin: string;
+  sellerEmail: string;
+  usersAge: string;
+  __v: number;
+  _id: string;
+};
+export type { userDataForClientSideType, productDataType };

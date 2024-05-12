@@ -1,6 +1,13 @@
-import React from "react";
-
-const ProductsCard1 = () => {
+"use client";
+import { productDataType } from "@/configs/types/types";
+import React, { useEffect } from "react";
+type propsType = {
+  productData: productDataType;
+};
+const ProductsCard1 = (props: propsType) => {
+  const { productData } = props;
+  const { productName, mainImageUrl, productHashtags } = productData;
+  console.log(productData);
   return (
     <div
       className="m-auto w-[19rem] lg:w-[100%]  border-[#e5e5e5] border-[2px] rounded-lg"
@@ -40,8 +47,10 @@ const ProductsCard1 = () => {
       </div>
       <hr className="my-2" />
       <div>
-        <div>
-          <img className="w-full" src="/images/shoe.png" alt="" />
+        <div className="flex items-center justify-center h-[20rem]">
+          <div className="w-[70%]">
+            <img className="w-full" src={""} alt="" />
+          </div>
         </div>
       </div>
       <hr className="my-2" />
@@ -88,10 +97,8 @@ const ProductsCard1 = () => {
             <div className="text-[#696969] text-[0.7rem] font-bold">7,350</div>
           </div>
         </div>
-        <div className="text-sm font-bold mt-2 ">
-          Sleek, wireless earbuds for immersive sound
-        </div>
-        <div className="text-xs">#sellers #shoes #china</div>
+        <div className="text-sm font-bold mt-2 ">{productName}</div>
+        <div className="text-xs">{productHashtags}</div>
         <div className="text-[0.5rem] my-2">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae,
           vitae magni voluptate corporis doloremque voluptatum. Beatae ipsa vel,

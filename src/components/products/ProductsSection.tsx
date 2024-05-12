@@ -1,6 +1,7 @@
 import React from "react";
 import TheSection from "../TheSection";
 import ProductsCard1 from "../ProductsCard1";
+import ProductsCardDiv1 from "./ProductsCardDiv1";
 
 const ProductsSection = () => {
   return (
@@ -384,19 +385,7 @@ const ProductsSection = () => {
             </div>
           </div>
           <hr className="my-5" />
-          <div>
-            <div className=" mt-5 md:mt-10 lg:mt-[3rem] grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {Array.from({ length: 14 }).map(() => {
-                return (
-                  <div key={Math.random().toString()}>
-                    <div>
-                      <ProductsCard1 />
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+          <ProductsCardDiv1 />
         </div>
       </div>
     </TheSection>

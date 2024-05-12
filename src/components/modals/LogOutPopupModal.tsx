@@ -1,6 +1,7 @@
 import { usePopup } from "@/configs/zustand/zustandPopup";
 import { useUser } from "@/configs/zustand/zustandUser";
 import React from "react";
+import { toast } from "react-toastify";
 
 const LogOutPopupModal = () => {
   const closePopup = usePopup((state) => state.closePopup);
@@ -19,6 +20,7 @@ const LogOutPopupModal = () => {
               onClick={() => {
                 markUserAsNotLoggedIn();
                 closePopup();
+                toast("Logout Successful");
               }}
               className="font-bold bg-[red] lg:text-xl px-5 py-1 rounded text-[white] active:scale-[0.95]"
             >

@@ -1,13 +1,148 @@
 "use client";
-import { productDataType } from "@/configs/types/types";
-import React, { useEffect } from "react";
+import {
+  productDataType,
+  userDataForClientSideType,
+} from "@/configs/types/types";
+import {
+  KEYNAME_OF_AUTHENTICATION_TOKEN_IN_LOCALSTORAGE,
+  SUB_ADDRESS_OF_CHECKING_LIKE_API,
+  SUB_ADDRESS_OF_DISLIKING_SOMETHING_API,
+  SUB_ADDRESS_OF_GETTING_SELLER_DETAILS_FOR_CLIENT_SIDE_API,
+  SUB_ADDRESS_OF_GETTING_TOTAL_NUMBER_OF_LIKES_API,
+  SUB_ADDRESS_OF_LIKE_SOMETHING_API,
+  serverURL,
+} from "@/data/EnvironmentVariables";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 type propsType = {
   productData: productDataType;
 };
+type sellerDetailsType = null | userDataForClientSideType;
+type productLikeStatusType = "LIKED" | "NOT_LIKED";
 const ProductsCard1 = (props: propsType) => {
+  const [sellerDetails, setSellerDetails] = useState(null as sellerDetailsType);
+  const [totalNumberOfLikes, setTotalNumberOfLikes] = useState(0);
+  const [productLikeStatus, setProductLikeStatus] = useState(
+    "NOT_LIKED" as productLikeStatusType
+  );
   const { productData } = props;
-  const { productName, mainImageUrl, productHashtags } = productData;
-  console.log(productData);
+  const {
+    productName,
+    mainImageUrl,
+    productHashtags,
+    price,
+    minimumQuantityToOrder,
+    sellerEmail,
+    productDescription,
+    ar7id,
+  } = productData;
+  const checkLikedOrNot = () => {
+    const authenticationToken = localStorage.getItem(
+      KEYNAME_OF_AUTHENTICATION_TOKEN_IN_LOCALSTORAGE
+    );
+    const dataForServer = {
+      ar7idOfSubjectThatReceivedLike: ar7id,
+      authenticationToken: authenticationToken,
+    };
+    axios
+      .post(`${serverURL}${SUB_ADDRESS_OF_CHECKING_LIKE_API}`, dataForServer)
+      .then((response) => {
+        const likeStatus = response.data.likeStatus as productLikeStatusType;
+        setProductLikeStatus(likeStatus);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const getTotalNumberOfLikes = () => {
+    const authenticationToken = localStorage.getItem(
+      KEYNAME_OF_AUTHENTICATION_TOKEN_IN_LOCALSTORAGE
+    );
+    const dataForServer = {
+      ar7idOfSubjectThatReceivedLike: ar7id,
+    };
+    axios
+      .post(
+        `${serverURL}${SUB_ADDRESS_OF_GETTING_TOTAL_NUMBER_OF_LIKES_API}`,
+        dataForServer
+      )
+      .then((response) => {
+        const numberOfLikes: number = response.data.totalNumberOfLikes;
+        setTotalNumberOfLikes(numberOfLikes);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect(() => {
+    const authenticationToken = localStorage.getItem(
+      KEYNAME_OF_AUTHENTICATION_TOKEN_IN_LOCALSTORAGE
+    );
+    const dataForServer = {
+      sellerEmail,
+      authenticationToken,
+    };
+    axios
+      .post(
+        `${serverURL}${SUB_ADDRESS_OF_GETTING_SELLER_DETAILS_FOR_CLIENT_SIDE_API}`,
+        dataForServer
+      )
+      .then((response) => {
+        const sellerDetails = response.data
+          .sellerDetails as userDataForClientSideType;
+        setSellerDetails(sellerDetails);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    checkLikedOrNot();
+    getTotalNumberOfLikes();
+  }, []);
+  const handleLikeProduct = () => {
+    const authenticationToken = localStorage.getItem(
+      KEYNAME_OF_AUTHENTICATION_TOKEN_IN_LOCALSTORAGE
+    );
+    const dataForServer = {
+      authenticationToken,
+      ar7idOfSubjectThatReceivedLike: ar7id,
+    };
+    axios
+      .post(`${serverURL}${SUB_ADDRESS_OF_LIKE_SOMETHING_API}`, dataForServer)
+      .then((response) => {
+        console.log(response);
+        checkLikedOrNot();
+        getTotalNumberOfLikes();
+        toast("Liked");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const handleDislikeProduct = () => {
+    const authenticationToken = localStorage.getItem(
+      KEYNAME_OF_AUTHENTICATION_TOKEN_IN_LOCALSTORAGE
+    );
+    const dataForServer = {
+      authenticationToken,
+      ar7idOfSubjectThatReceivedLike: ar7id,
+    };
+    axios
+      .post(
+        `${serverURL}${SUB_ADDRESS_OF_DISLIKING_SOMETHING_API}`,
+        dataForServer
+      )
+      .then((response) => {
+        console.log(response);
+        checkLikedOrNot();
+        getTotalNumberOfLikes();
+        toast("Disliked");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div
       className="m-auto w-[19rem] lg:w-[100%]  border-[#e5e5e5] border-[2px] rounded-lg"
@@ -19,11 +154,13 @@ const ProductsCard1 = (props: propsType) => {
             <img className="min-w-[3rem]" src="/icons/ellipse.png" alt="" />
           </div>
           <div>
-            <div className="text-[0.6rem] font-bold">Skinelegance Exports</div>
-            <div className="text-[0.5rem] text-[#696969] font-bold">
-              @Skineleganceexports
+            <div className="text-[0.6rem] font-bold">
+              {sellerDetails?.userFullName}
             </div>
-            <div className="text-[0.5rem]">United States</div>
+            <div className="text-[0.5rem] text-[#696969] font-bold">
+              {sellerEmail}
+            </div>
+            <div className="text-[0.5rem]">{sellerDetails?.countryRegion}</div>
           </div>
         </div>
 
@@ -49,7 +186,7 @@ const ProductsCard1 = (props: propsType) => {
       <div>
         <div className="flex items-center justify-center h-[20rem]">
           <div className="w-[70%]">
-            <img className="w-full" src={""} alt="" />
+            <img className="w-full" src={mainImageUrl} alt="" />
           </div>
         </div>
       </div>
@@ -58,13 +195,26 @@ const ProductsCard1 = (props: propsType) => {
         <div className="flex justify-between items-end">
           <div className="flex flex-col items-center">
             <div>
-              <img
-                className="w-[1.5rem] hover:scale-[1.05]"
-                src="/icons/love.svg"
-                alt=""
-              />
+              {productLikeStatus === "NOT_LIKED" && (
+                <img
+                  className="w-[1.5rem] hover:scale-[1.05]"
+                  src="/icons/love.svg"
+                  alt=""
+                  onClick={handleLikeProduct}
+                />
+              )}
+              {productLikeStatus === "LIKED" && (
+                <img
+                  className="w-[1.5rem] hover:scale-[1.05]"
+                  src="/icons/sector-2/heart-circle-check-solid.svg"
+                  alt=""
+                  onClick={handleDislikeProduct}
+                />
+              )}
             </div>
-            <div className="text-[#696969] text-[0.7rem] font-bold">9,200</div>
+            <div className="text-[#696969] text-[0.7rem] font-bold">
+              {totalNumberOfLikes}
+            </div>
           </div>
           <div className="flex flex-col items-center">
             <div>
@@ -99,15 +249,12 @@ const ProductsCard1 = (props: propsType) => {
         </div>
         <div className="text-sm font-bold mt-2 ">{productName}</div>
         <div className="text-xs">{productHashtags}</div>
-        <div className="text-[0.5rem] my-2">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae,
-          vitae magni voluptate corporis doloremque voluptatum. Beatae ipsa vel,
-          animi quo eum labore perspiciatis ab asperiores ut odit est quia
-          libero.
-        </div>
+        <div className="text-[0.5rem] my-2">{productDescription}</div>
         <div className="flex justify-between items-center">
-          <div className="font-medium">$79.99-$299.9</div>
-          <div className="text-xs font-medium text-[#696969]">Min 20 Units</div>
+          <div className="font-medium">${price}</div>
+          <div className="text-xs font-medium text-[#696969]">
+            Min {minimumQuantityToOrder} Units
+          </div>
         </div>
         <div className="flex items-center justify-between mt-4 mb-2">
           <div>

@@ -18,7 +18,6 @@ const usePopup = create<usePopupType>((set) => ({
   },
   closePopup: () => {
     set((state) => {
-      toast("Logout Successful");
       return { ...state, currentlyOpenedPopup: "NO_POPUP" };
     });
   },

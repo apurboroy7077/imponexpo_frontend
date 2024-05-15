@@ -27,13 +27,14 @@ const ProductsCard1 = (props: propsType) => {
     "NOT_LIKED" as productLikeStatusType
   );
   const { productData } = props;
+
   const {
     productName,
     mainImageUrl,
     productHashtags,
     price,
     minimumQuantityToOrder,
-    sellerEmail,
+    ar7idOfTheSeller,
     productDescription,
     ar7id,
   } = productData;
@@ -80,7 +81,7 @@ const ProductsCard1 = (props: propsType) => {
       KEYNAME_OF_AUTHENTICATION_TOKEN_IN_LOCALSTORAGE
     );
     const dataForServer = {
-      sellerEmail,
+      ar7idOfTheSeller,
       authenticationToken,
     };
     axios
@@ -158,7 +159,7 @@ const ProductsCard1 = (props: propsType) => {
               {sellerDetails?.userFullName}
             </div>
             <div className="text-[0.5rem] text-[#696969] font-bold">
-              {sellerEmail}
+              {ar7idOfTheSeller}
             </div>
             <div className="text-[0.5rem]">{sellerDetails?.countryRegion}</div>
           </div>

@@ -21,6 +21,7 @@ const SignInForm = () => {
     const formData = new FormData(e.currentTarget);
     const userEmail = formData.get("user-email");
     const password = formData.get("password");
+
     const dataForServer = {
       userEmail,
       password,

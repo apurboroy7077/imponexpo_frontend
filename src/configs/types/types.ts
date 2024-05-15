@@ -11,6 +11,7 @@ type userDataForClientSideType = {
 };
 type productDataType = {
   ar7id: string;
+  ar7idOfTheSeller: string;
   inStock: boolean;
   mainImageUrl: string;
   minimumQuantityToOrder: string;
@@ -21,7 +22,7 @@ type productDataType = {
   productHashtags: string;
   productName: string;
   productOrigin: string;
-  sellerEmail: string;
+
   usersAge: string;
   __v: number;
   _id: string;

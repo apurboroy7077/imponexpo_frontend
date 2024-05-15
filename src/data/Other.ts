@@ -3,6 +3,8 @@ const dummyProductData = {
   productName: "test",
   productCategory: "Furniture",
   sellerEmail: "apurboroy7077@gmail.com",
+  ar7idOfTheSeller:
+    "NZfP011ZEM-QETtaDOiBS-TAulFVMvVA-O9fPXRATXR-TJfrSuyhnU-UCM89bZPUE-BXMyeG2iJL-AR7",
   price: "11",
   priceType: "Fixed",
   productHashtags: "#123",

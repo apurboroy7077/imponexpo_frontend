@@ -25,6 +25,16 @@ const SUB_ADDRESS_OF_SEEING_USER_DETAILS_BY_ADMIN_API =
   "/admin/see-user-details/api";
 const SUB_ADDRESS_OF_GETTING_REPORTS_MADE_BY_USER_API =
   "/admin/getting-reports-made-by-user/api";
+const SUB_ADDRESS_OF_GIVING_COMMENT_API = "/user-activity/giving-comment/api";
+const SUB_ADDRESS_OF_GETTING_COMMENTS_OF_SOMETHING_API =
+  "/user-activity/getting-comments-of-something/api";
+const SUB_ADDRESS_OF_GETTING_USER_DETAILS_FOR_CLIENTS_API =
+  "/authentication/getting-user-details-for-clients/api";
+const SUB_ADDRESS_OF_FOLLOW_SOMEONE_API = "/user-activity/follow-someone/api";
+const SUB_ADDRESS_OF_CHECKING_FOLLOWING_SOMETHING_OR_NOT_API =
+  "/user-activity/checking-following-something-or-not/api";
+const SUB_ADDRESS_OF_UNFOLLOW_SOMEONE_API =
+  "/user-activity/unfollow-someone/api";
 export {
   serverURL,
   KEYNAME_OF_AUTHENTICATION_TOKEN_IN_LOCALSTORAGE,
@@ -45,4 +55,10 @@ export {
   SUB_ADDRESS_OF_SEEING_USER_DETAILS_BY_ADMIN_API,
   SUB_ADDRESS_OF_MAKING_REPORT_API,
   SUB_ADDRESS_OF_GETTING_REPORTS_MADE_BY_USER_API,
+  SUB_ADDRESS_OF_GIVING_COMMENT_API,
+  SUB_ADDRESS_OF_GETTING_COMMENTS_OF_SOMETHING_API,
+  SUB_ADDRESS_OF_GETTING_USER_DETAILS_FOR_CLIENTS_API,
+  SUB_ADDRESS_OF_FOLLOW_SOMEONE_API,
+  SUB_ADDRESS_OF_CHECKING_FOLLOWING_SOMETHING_OR_NOT_API,
+  SUB_ADDRESS_OF_UNFOLLOW_SOMEONE_API,
 };

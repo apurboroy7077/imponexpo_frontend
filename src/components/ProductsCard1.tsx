@@ -3,13 +3,17 @@ import {
   productDataType,
   userDataForClientSideType,
 } from "@/configs/types/types";
+import { usePopup } from "@/configs/zustand/zustandPopup";
 import {
   KEYNAME_OF_AUTHENTICATION_TOKEN_IN_LOCALSTORAGE,
+  SUB_ADDRESS_OF_CHECKING_FOLLOWING_SOMETHING_OR_NOT_API,
   SUB_ADDRESS_OF_CHECKING_LIKE_API,
   SUB_ADDRESS_OF_DISLIKING_SOMETHING_API,
+  SUB_ADDRESS_OF_FOLLOW_SOMEONE_API,
   SUB_ADDRESS_OF_GETTING_SELLER_DETAILS_FOR_CLIENT_SIDE_API,
   SUB_ADDRESS_OF_GETTING_TOTAL_NUMBER_OF_LIKES_API,
   SUB_ADDRESS_OF_LIKE_SOMETHING_API,
+  SUB_ADDRESS_OF_UNFOLLOW_SOMEONE_API,
   serverURL,
 } from "@/data/EnvironmentVariables";
 import axios from "axios";
@@ -20,11 +24,20 @@ type propsType = {
 };
 type sellerDetailsType = null | userDataForClientSideType;
 type productLikeStatusType = "LIKED" | "NOT_LIKED";
+type followingSellerStatusType = "FOLLOWING" | "NOT_FOLLOWING";
 const ProductsCard1 = (props: propsType) => {
+  const openPopup = usePopup((state) => state.openPopup);
+
   const [sellerDetails, setSellerDetails] = useState(null as sellerDetailsType);
   const [totalNumberOfLikes, setTotalNumberOfLikes] = useState(0);
   const [productLikeStatus, setProductLikeStatus] = useState(
     "NOT_LIKED" as productLikeStatusType
+  );
+  const [followingSellerStatus, setFollowingSellerStatus] = useState(
+    "NOT_FOLLOWING" as followingSellerStatusType
+  );
+  const setAr7idOfTheCommentPopupSubject = usePopup(
+    (state) => state.setAr7idOfTheCommentPopupSubject
   );
   const { productData } = props;
 
@@ -76,7 +89,7 @@ const ProductsCard1 = (props: propsType) => {
         console.log(error);
       });
   };
-  useEffect(() => {
+  const getSellerDetailsHandler = () => {
     const authenticationToken = localStorage.getItem(
       KEYNAME_OF_AUTHENTICATION_TOKEN_IN_LOCALSTORAGE
     );
@@ -97,9 +110,8 @@ const ProductsCard1 = (props: propsType) => {
       .catch((error) => {
         console.log(error);
       });
-    checkLikedOrNot();
-    getTotalNumberOfLikes();
-  }, []);
+  };
+
   const handleLikeProduct = () => {
     const authenticationToken = localStorage.getItem(
       KEYNAME_OF_AUTHENTICATION_TOKEN_IN_LOCALSTORAGE
@@ -143,7 +155,78 @@ const ProductsCard1 = (props: propsType) => {
         console.log(error);
       });
   };
+  const handleOpenCommentPopup = () => {
+    openPopup("PRODUCT_COMMENTS_POPUP");
+    setAr7idOfTheCommentPopupSubject(ar7id);
+  };
+  const handleFollowSomeone = () => {
+    const authenticationToken = localStorage.getItem(
+      KEYNAME_OF_AUTHENTICATION_TOKEN_IN_LOCALSTORAGE
+    );
+    const dataForServer = {
+      authenticationToken: authenticationToken,
+      ar7idOfTheSubjectWhichWillBeFollowed: sellerDetails?.ar7id,
+    };
 
+    axios
+      .post(`${serverURL}${SUB_ADDRESS_OF_FOLLOW_SOMEONE_API}`, dataForServer)
+      .then((response) => {
+        setFollowingSellerStatus("FOLLOWING");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const checkingFollowingSellerOrNotHandler = () => {
+    const authenticationToken = localStorage.getItem(
+      KEYNAME_OF_AUTHENTICATION_TOKEN_IN_LOCALSTORAGE
+    );
+    const dataForServer = {
+      ar7idOfSubjectWhichIsGettingFollowed: sellerDetails?.ar7id,
+      authenticationToken: authenticationToken,
+    };
+
+    axios
+      .post(
+        `${serverURL}${SUB_ADDRESS_OF_CHECKING_FOLLOWING_SOMETHING_OR_NOT_API}`,
+        dataForServer
+      )
+      .then((response) => {
+        const followingStatus = response.data.followingStatus;
+        setFollowingSellerStatus(followingStatus);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const handleUnfollowSomeone = () => {
+    const authenticationToken = localStorage.getItem(
+      KEYNAME_OF_AUTHENTICATION_TOKEN_IN_LOCALSTORAGE
+    );
+    const dataForServer = {
+      authenticationToken: authenticationToken,
+      ar7idOfTheSubjectWhichWillBeFollowed: sellerDetails?.ar7id,
+    };
+
+    axios
+      .post(`${serverURL}${SUB_ADDRESS_OF_UNFOLLOW_SOMEONE_API}`, dataForServer)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect(() => {
+    getSellerDetailsHandler();
+    checkLikedOrNot();
+    getTotalNumberOfLikes();
+  }, []);
+  useEffect(() => {
+    if (sellerDetails) {
+      checkingFollowingSellerOrNotHandler();
+    }
+  }, []);
   return (
     <div
       className="m-auto w-[19rem] lg:w-[100%]  border-[#e5e5e5] border-[2px] rounded-lg"
@@ -167,9 +250,23 @@ const ProductsCard1 = (props: propsType) => {
 
         <div>
           <div className="text-[0.5rem]">
-            <button className="border-[black] border-[1px] rounded px-4 py-[0.15rem] hover:bg-[black] hover:text-[white] font-medium active:scale-[0.99]">
-              Follow
-            </button>
+            {followingSellerStatus === "NOT_FOLLOWING" && (
+              <button
+                className="border-[black] border-[1px] rounded px-4 py-[0.15rem] hover:bg-[black] hover:text-[white] font-medium active:scale-[0.99]"
+                onClick={handleFollowSomeone}
+              >
+                Follow
+              </button>
+            )}
+
+            {followingSellerStatus === "FOLLOWING" && (
+              <button
+                className="border-[black] bg-[#1d5dc7] text-[white] border-[1px] rounded px-4 py-[0.15rem]  font-medium active:scale-[0.99]"
+                onClick={handleUnfollowSomeone}
+              >
+                Following
+              </button>
+            )}
           </div>
           <div className="text-[0.5rem] font-bold mt-1 text-[#4e4e4e]">
             1.2k followers
@@ -223,6 +320,7 @@ const ProductsCard1 = (props: propsType) => {
                 className="w-[1.5rem] hover:scale-[1.05]"
                 src="/icons/message.svg"
                 alt=""
+                onClick={handleOpenCommentPopup}
               />
             </div>
             <div className="text-[#696969] text-[0.7rem] font-bold">5,900</div>

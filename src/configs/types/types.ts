@@ -8,6 +8,9 @@ type userDataForClientSideType = {
   countryRegion: string;
   reasonForSignup: string;
   imponexpoAccountURL: string;
+  ar7id: string;
+  __v: string;
+  _id: string;
 };
 type productDataType = {
   ar7id: string;
@@ -27,4 +30,12 @@ type productDataType = {
   __v: number;
   _id: string;
 };
-export type { userDataForClientSideType, productDataType };
+type commentDataType = {
+  ar7idOfCommentGiver: string;
+  ar7idOfSubjectWhoReceivedComment: string;
+  comment: string;
+  timeStamp: string;
+  __v: string;
+  _id: string;
+};
+export type { userDataForClientSideType, productDataType, commentDataType };

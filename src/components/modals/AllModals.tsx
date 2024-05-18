@@ -6,10 +6,13 @@ import ProductCommentPopupModal from "./ProductCommentPopupModal";
 
 const AllModals = () => {
   const currentlyOpenedPopup = usePopup((state) => state.currentlyOpenedPopup);
+
   return (
     <>
       {currentlyOpenedPopup === "LOGOUT_POPUP" && <LogOutPopupModal />}{" "}
-      {/* <ProductCommentPopupModal /> */}
+      {currentlyOpenedPopup === "PRODUCT_COMMENTS_POPUP" && (
+        <ProductCommentPopupModal />
+      )}
     </>
   );
 };

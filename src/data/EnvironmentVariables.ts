@@ -1,4 +1,4 @@
-const serverURL = `http://localhost:5050`;
+const serverURL = `https://imponexpo-backend.onrender.com`;
 const KEYNAME_OF_AUTHENTICATION_TOKEN_IN_LOCALSTORAGE =
   "imponexpo_authentication_token";
 const AUTHENTICATE_USER_WITH_TOKEN_SUB_URL = `/authentication/authenticate-user-with-token`;
@@ -35,6 +35,8 @@ const SUB_ADDRESS_OF_CHECKING_FOLLOWING_SOMETHING_OR_NOT_API =
   "/user-activity/checking-following-something-or-not/api";
 const SUB_ADDRESS_OF_UNFOLLOW_SOMEONE_API =
   "/user-activity/unfollow-someone/api";
+const SUB_ADDRESS_OF_GETTING_TOTAL_NUMBERS_OF_FOLLOWERS_OF_A_SUBJECT_API =
+  "/user-activity/get-total-number-of-followers-of-a-subject/api";
 export {
   serverURL,
   KEYNAME_OF_AUTHENTICATION_TOKEN_IN_LOCALSTORAGE,
@@ -61,4 +63,5 @@ export {
   SUB_ADDRESS_OF_FOLLOW_SOMEONE_API,
   SUB_ADDRESS_OF_CHECKING_FOLLOWING_SOMETHING_OR_NOT_API,
   SUB_ADDRESS_OF_UNFOLLOW_SOMEONE_API,
+  SUB_ADDRESS_OF_GETTING_TOTAL_NUMBERS_OF_FOLLOWERS_OF_A_SUBJECT_API,
 };

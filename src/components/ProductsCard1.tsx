@@ -11,6 +11,7 @@ import {
   SUB_ADDRESS_OF_DISLIKING_SOMETHING_API,
   SUB_ADDRESS_OF_FOLLOW_SOMEONE_API,
   SUB_ADDRESS_OF_GETTING_SELLER_DETAILS_FOR_CLIENT_SIDE_API,
+  SUB_ADDRESS_OF_GETTING_TOTAL_NUMBERS_OF_FOLLOWERS_OF_A_SUBJECT_API,
   SUB_ADDRESS_OF_GETTING_TOTAL_NUMBER_OF_LIKES_API,
   SUB_ADDRESS_OF_LIKE_SOMETHING_API,
   SUB_ADDRESS_OF_UNFOLLOW_SOMEONE_API,
@@ -36,6 +37,8 @@ const ProductsCard1 = (props: propsType) => {
   const [followingSellerStatus, setFollowingSellerStatus] = useState(
     "NOT_FOLLOWING" as followingSellerStatusType
   );
+  const [numberOfFollowersOfSeller, setNumberOfFollowersOfSellers] =
+    useState("0");
   const setAr7idOfTheCommentPopupSubject = usePopup(
     (state) => state.setAr7idOfTheCommentPopupSubject
   );
@@ -51,6 +54,7 @@ const ProductsCard1 = (props: propsType) => {
     productDescription,
     ar7id,
   } = productData;
+
   const checkLikedOrNot = () => {
     const authenticationToken = localStorage.getItem(
       KEYNAME_OF_AUTHENTICATION_TOKEN_IN_LOCALSTORAGE
@@ -172,8 +176,11 @@ const ProductsCard1 = (props: propsType) => {
       .post(`${serverURL}${SUB_ADDRESS_OF_FOLLOW_SOMEONE_API}`, dataForServer)
       .then((response) => {
         setFollowingSellerStatus("FOLLOWING");
+        gettingTotalNumberOfFollowersOfTheSellerHandler();
       })
       .catch((error) => {
+        checkingFollowingSellerOrNotHandler();
+        gettingTotalNumberOfFollowersOfTheSellerHandler();
         console.log(error);
       });
   };
@@ -185,7 +192,6 @@ const ProductsCard1 = (props: propsType) => {
       ar7idOfSubjectWhichIsGettingFollowed: sellerDetails?.ar7id,
       authenticationToken: authenticationToken,
     };
-
     axios
       .post(
         `${serverURL}${SUB_ADDRESS_OF_CHECKING_FOLLOWING_SOMETHING_OR_NOT_API}`,
@@ -193,7 +199,25 @@ const ProductsCard1 = (props: propsType) => {
       )
       .then((response) => {
         const followingStatus = response.data.followingStatus;
+        console.log(followingStatus);
         setFollowingSellerStatus(followingStatus);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const gettingTotalNumberOfFollowersOfTheSellerHandler = () => {
+    const dataForServer = {
+      ar7idOfSubjectWhichIsGettingFollowed: sellerDetails?.ar7id,
+    };
+    axios
+      .post(
+        `${serverURL}${SUB_ADDRESS_OF_GETTING_TOTAL_NUMBERS_OF_FOLLOWERS_OF_A_SUBJECT_API}`,
+        dataForServer
+      )
+      .then((response) => {
+        const totalNumbersOfFollowers = response.data.totalFollowersOfTheUser;
+        setNumberOfFollowersOfSellers(totalNumbersOfFollowers);
       })
       .catch((error) => {
         console.log(error);
@@ -211,7 +235,8 @@ const ProductsCard1 = (props: propsType) => {
     axios
       .post(`${serverURL}${SUB_ADDRESS_OF_UNFOLLOW_SOMEONE_API}`, dataForServer)
       .then((response) => {
-        console.log(response);
+        checkingFollowingSellerOrNotHandler();
+        gettingTotalNumberOfFollowersOfTheSellerHandler();
       })
       .catch((error) => {
         console.log(error);
@@ -225,8 +250,9 @@ const ProductsCard1 = (props: propsType) => {
   useEffect(() => {
     if (sellerDetails) {
       checkingFollowingSellerOrNotHandler();
+      gettingTotalNumberOfFollowersOfTheSellerHandler();
     }
-  }, []);
+  }, [sellerDetails]);
   return (
     <div
       className="m-auto w-[19rem] lg:w-[100%]  border-[#e5e5e5] border-[2px] rounded-lg"
@@ -268,8 +294,8 @@ const ProductsCard1 = (props: propsType) => {
               </button>
             )}
           </div>
-          <div className="text-[0.5rem] font-bold mt-1 text-[#4e4e4e]">
-            1.2k followers
+          <div className="text-[0.5rem] font-bold mt-1 text-[#4e4e4e] text-center">
+            {numberOfFollowersOfSeller} followers
           </div>
         </div>
       </div>

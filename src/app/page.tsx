@@ -17,12 +17,13 @@ import TrendingDeals from "@/components/TrendingDeals";
 import TrendingHashtags from "@/components/TrendingHashtags";
 import TrendingOnReadyMate from "@/components/TrendingOnReadyMate";
 import TrendingProducts from "@/components/TrendingProducts";
+import Navbar5 from "@/components/navbar/Navbar5";
 import Image from "next/image";
 
 export default function Home() {
   return (
     <>
-      <Navbar3 />
+      <Navbar5 />
       <HeroSection1 />
       <TrendingProducts />
       <PeopleAndBusinessTrending />

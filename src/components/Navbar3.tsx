@@ -9,57 +9,60 @@ const Navbar3 = () => {
   const userData = useUser((state) => state.userData);
   const openPopup = usePopup((state) => state.openPopup);
   return (
-    <nav className="hidden md:block border-b-[2px]">
+    <nav className="hidden md:block border-b-[2px] shadow-lg">
       <div className=" bg-[#333333]  py-2 lg:py-5  flex items-center justify-center text-nowrap">
         <div className="w-full px-5 lg:px-5 max-w-[100rem]">
           <div className="">
             <ul className="flex justify-between  items-center">
-              <li className="">
-                <span className="text-[0.7rem] lg:text-base text-[white] font-medium">
-                  <Link href="/">Dropshipping</Link>
-                </span>
-              </li>
-              <li className=" ">
-                <span className=" text-[0.7rem] lg:text-base text-[white]  font-medium">
-                  <Link href="/">Trade Shows</Link>
-                </span>
-              </li>
-              <li className="">
-                <span className="text-[0.7rem] lg:text-base text-[white]   font-medium">
-                  <Link href="/">Help</Link>
-                </span>
-              </li>
-              <li className="">
-                <span className="text-[0.7rem] lg:text-base text-[white]  font-medium">
-                  <Link href="/">Make Money On Impoexpo</Link>
-                </span>
-              </li>
-              <li className="">
-                <span className="text-[0.7rem] lg:text-base text-[white]  font-medium">
-                  <Link href="/">Blog</Link>
-                </span>
-              </li>
-
-              <li className="">
-                <div className="flex gap-1 px-[1rem] lg:px-[1.5rem] py-[0.3rem]  items-center border-[1px]  rounded-xl border-[white]">
-                  <div>
-                    <img
-                      className="w-[1.5rem]"
-                      src="/icons/nigeria-flag-2.png"
-                      alt=""
-                    />
+              <div className="flex items-center gap-10 lg:gap-20">
+                <li className="">
+                  <span className="text-[0.7rem] lg:text-base text-[white] font-medium">
+                    <Link href="/">Dropshipping</Link>
+                  </span>
+                </li>
+                <li className=" ">
+                  <span className=" text-[0.7rem] lg:text-base text-[white]  font-medium">
+                    <Link href="/">Trade Shows</Link>
+                  </span>
+                </li>
+                <li className="">
+                  <span className="text-[0.7rem] lg:text-base text-[white]   font-medium">
+                    <Link href="/">Help</Link>
+                  </span>
+                </li>
+                <li className="">
+                  <span className="text-[0.7rem] lg:text-base text-[white]  font-medium">
+                    <Link href="/">Make Money On Impoexpo</Link>
+                  </span>
+                </li>
+                <li className="">
+                  <span className="text-[0.7rem] lg:text-base text-[white]  font-medium">
+                    <Link href="/blogs">Blog</Link>
+                  </span>
+                </li>
+              </div>
+              <div>
+                <li className="">
+                  <div className="flex gap-1 px-[1rem] lg:px-[1.5rem] py-[0.3rem]  items-center border-[1px]  rounded-xl border-[white]">
+                    <div>
+                      <img
+                        className="w-[1.5rem]"
+                        src="/icons/nigeria-flag-2.png"
+                        alt=""
+                      />
+                    </div>
+                    <div className="text-[#666666] font-bold text-[0.7rem] lg:text-sm">
+                      Nigeria | &nbsp;
+                    </div>
+                    <div className="text-[#666666] font-bold text-[0.7rem] lg:text-sm">
+                      English | &nbsp;
+                    </div>
+                    <div className="text-[#666666] font-bold text-[0.7rem] lg:text-sm">
+                      Naira
+                    </div>
                   </div>
-                  <div className="text-[#666666] font-bold text-[0.7rem] lg:text-sm">
-                    Nigeria | &nbsp;
-                  </div>
-                  <div className="text-[#666666] font-bold text-[0.7rem] lg:text-sm">
-                    English | &nbsp;
-                  </div>
-                  <div className="text-[#666666] font-bold text-[0.7rem] lg:text-sm">
-                    Naira
-                  </div>
-                </div>
-              </li>
+                </li>
+              </div>
             </ul>
           </div>
         </div>
@@ -251,7 +254,6 @@ const Navbar3 = () => {
               </li>
             </ul>
           </div>
-          {/* <hr className="mt-5" /> */}
         </div>
       </div>
     </nav>

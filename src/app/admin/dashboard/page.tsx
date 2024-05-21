@@ -1,12 +1,11 @@
 import Navbar3 from "@/components/Navbar3";
-import AdminDashboard from "@/components/dashboards/AdminDashboard";
+import Dashboard3 from "@/components/dashboard-3/Dashboard3";
 import React from "react";
 
 const page = () => {
   return (
     <>
-      <Navbar3 />
-      <AdminDashboard />
+      <Dashboard3 />
     </>
   );
 };

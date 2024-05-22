@@ -1,11 +1,16 @@
 import { useDashboard } from "@/configs/zustand/zustandDashboard";
+import {
+  MULTIPLE_USERS_ICON_BLACK_SRC,
+  MULTIPLE_USERS_ICON_WHITE_SRC,
+} from "@/data/ImageSrc";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useRef } from "react";
 type pathNameType =
   | "/admin/dashboard"
   | "/admin/dashboard/settings"
-  | "/admin/dashboard/profile";
+  | "/admin/dashboard/profile"
+  | "/admin/dashboard/manage-users";
 const MenubarAdminDashboard3 = () => {
   const pathName = usePathname() as pathNameType;
   const menubarRef = useRef(null);
@@ -97,6 +102,26 @@ const MenubarAdminDashboard3 = () => {
                   />
                 </div>
                 <div>Profile</div>
+              </div>
+            </div>
+          </Link>
+          <Link href={"/admin/dashboard/manage-users"}>
+            <div
+              className={`flex items-center justify-between px-3 py-2 rounded  ${
+                pathName === "/admin/dashboard/manage-users"
+                  ? "bg-[#333a48]"
+                  : ""
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-[2rem]">
+                  <img
+                    className="w-full opacity-[0.7]"
+                    src={MULTIPLE_USERS_ICON_WHITE_SRC}
+                    alt=""
+                  />
+                </div>
+                <div>Manage Users</div>
               </div>
             </div>
           </Link>

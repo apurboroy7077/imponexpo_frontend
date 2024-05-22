@@ -78,7 +78,7 @@ const Navbar5 = () => {
         </div>
       )}
       <nav
-        className={`  transition-all  top-0 ${
+        className={` z-30  transition-all  top-0 ${
           stickyStatus === "NOT_STICKY" ? "block" : "sticky"
         }`}
       >

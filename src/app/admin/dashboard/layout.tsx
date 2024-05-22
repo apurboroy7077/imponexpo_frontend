@@ -8,6 +8,7 @@ import MenubarAdminDashboard3 from "@/components/dashboard-3/MenubarAdminDashboa
 import HeaderAdminDashboard3 from "@/components/dashboard-3/HeaderAdminDashboard3";
 import Navbar3 from "@/components/Navbar3";
 import Footer3 from "@/components/Footer3";
+import Navbar5 from "@/components/navbar/Navbar5";
 
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
@@ -186,7 +187,7 @@ const Dashboard3 = (props: propsType) => {
   const children = props.children;
   return (
     <>
-      <Navbar3 />
+      <Navbar5 />
       <div>
         <div className="lg:flex  relative h-screen">
           <MenubarAdminDashboard3 />

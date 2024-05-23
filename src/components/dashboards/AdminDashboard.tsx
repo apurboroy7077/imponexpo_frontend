@@ -1,4 +1,5 @@
 "use client";
+import { SUB_ADDRESS_OF_GETTING_RANDOM_PRODUCTS_2_API } from "@/data/ApiAddresses";
 import {
   KEYNAME_OF_AUTHENTICATION_TOKEN_IN_LOCALSTORAGE,
   SUB_ADDRESS_OF_APPROVING_PRODUCT_API,
@@ -205,6 +206,16 @@ const AdminDashboard = () => {
         console.log(error);
       });
   };
+  const handleGetRandomProducts2 = () => {
+    axios
+      .post(`${serverURL}${SUB_ADDRESS_OF_GETTING_RANDOM_PRODUCTS_2_API}`, {})
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div className="p-10">
       <button
@@ -260,6 +271,12 @@ const AdminDashboard = () => {
         onClick={gettingUsersReportHandler}
       >
         Get Reports Made By Users
+      </button>
+      <button
+        className=" m-5 border-[2px] bg-[green] text-[white] px-3 py-1 rounded-lg outline-none border-none active:scale-[0.95]"
+        onClick={handleGetRandomProducts2}
+      >
+        Get Random Products 2
       </button>
     </div>
   );

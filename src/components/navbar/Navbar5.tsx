@@ -1,4 +1,6 @@
 "use client";
+import { usePopup } from "@/configs/zustand/zustandPopup";
+import { useUser } from "@/configs/zustand/zustandUser";
 import {
   BARS_BLACK_ICON_SRC,
   BARS_ICON_SRC,
@@ -9,6 +11,10 @@ import {
   MICROPHONE_ICON_SRC,
   USER_ICON,
 } from "@/data/ImageSrc";
+import {
+  SIGN_IN_PAGE_ADDRESS,
+  SIGN_UP_PAGE_ADDRESS,
+} from "@/data/PageAddresses";
 import Link from "next/link";
 
 import { usePathname } from "next/navigation";
@@ -41,6 +47,9 @@ const Navbar5 = () => {
   const pathName = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState("NOT_OPENED" as isMenuOpenType);
   const [screenWidth, setScreenWidth] = useState(0 as number);
+  const loginStatus = useUser((state) => state.loginStatus);
+  const loggedUserDetails = useUser((state) => state.userData);
+  const openPopup = usePopup((state) => state.openPopup);
   const [stickyStatus, setSticlyStatus] = useState(
     "NOT_STICKY" as stickyStatusType
   );
@@ -245,27 +254,67 @@ const Navbar5 = () => {
                           </div>
                         </div>
                         <div>
-                          <div className="  mt-6 lg:mt-0 flex flex-col lg:flex-row lg:items-center gap-5">
-                            <div className="flex items-center gap-2 ">
+                          {loginStatus === "LOGGED_IN" && (
+                            <div className="  mt-6 lg:mt-0 flex flex-col lg:flex-row lg:items-center gap-5">
                               <div>
-                                <img
-                                  className="w-[1.5rem] "
-                                  src={USER_ICON}
-                                  alt=""
-                                />
+                                <Link href={"/"}>
+                                  <button className="flex items-center gap-2 active:scale-[0.97]">
+                                    <div>
+                                      <img
+                                        className="w-[1.5rem] "
+                                        src={USER_ICON}
+                                        alt=""
+                                      />
+                                    </div>
+                                    <div>
+                                      <div className="font-bold text-[#1d5ec9]">
+                                        {loggedUserDetails?.userFullName}
+                                      </div>
+                                    </div>
+                                  </button>
+                                </Link>
                               </div>
                               <div>
-                                <div className="font-bold text-[#1d5ec9]">
-                                  Apurbo Roy
-                                </div>
+                                <button
+                                  onClick={() => {
+                                    openPopup("LOGOUT_POPUP");
+                                  }}
+                                  className="text-[#1d5ec9] border-[#1d5ec9] border-[2px] px-3 py-1 rounded-md active:scale-[0.97]"
+                                >
+                                  Logout
+                                </button>
                               </div>
                             </div>
-                            <div>
-                              <button className="text-[#1d5ec9] border-[#1d5ec9] border-[2px] px-3 py-1 rounded-md">
-                                Logout
-                              </button>
+                          )}
+                          {loginStatus === "NOT_LOGGED_IN" && (
+                            <div className="  mt-6 lg:mt-0 flex flex-col lg:flex-row lg:items-center gap-5">
+                              <div>
+                                <Link href={SIGN_IN_PAGE_ADDRESS}>
+                                  <button className="flex items-center gap-2 active:scale-[0.97]">
+                                    <div>
+                                      <img
+                                        className="w-[1.5rem] "
+                                        src={USER_ICON}
+                                        alt=""
+                                      />
+                                    </div>
+                                    <div>
+                                      <div className="font-bold text-[#1d5ec9]">
+                                        Login
+                                      </div>
+                                    </div>
+                                  </button>
+                                </Link>
+                              </div>
+                              <div>
+                                <Link href={SIGN_UP_PAGE_ADDRESS}>
+                                  <button className="text-[#1d5ec9] border-[#1d5ec9] border-[2px] px-3 py-1 rounded-md active:scale-[0.97]">
+                                    Register
+                                  </button>
+                                </Link>
+                              </div>
                             </div>
-                          </div>
+                          )}
                         </div>
                       </div>
                     </div>

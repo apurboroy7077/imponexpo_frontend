@@ -1,6 +1,10 @@
+import { receivedProductDataType } from "@/configs/types/receivedProductType";
 import React from "react";
-
-const ProductsDetailsSection2 = () => {
+type propsType = {
+  productData: null | receivedProductDataType;
+};
+const ProductsDetailsSection2 = (props: propsType) => {
+  const receivedProductData = props.productData;
   return (
     <section>
       <div className=" px-2 py-5 lg:py-7   flex items-center justify-center">
@@ -41,39 +45,38 @@ const ProductsDetailsSection2 = () => {
           </div>
           <div>
             <div className="text-[#0e1514] text-xs lg:text-base mt-3 lg:mt-5">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Assumenda, nisi dolore distinctio, molestias expedita cumque
-              eligendi aliquid deleniti incidunt eum iste animi quaerat
-              accusantium consequuntur saepe a corrupti tempora delectus? Lorem
-              ipsum dolor sit amet consectetur adipisicing elit. Dolor harum
-              culpa odit cupiditate, nulla eaque dicta quisquam, ducimus totam
-              a, nostrum labore nam neque quae blanditiis alias assumenda
-              exercitationem suscipit!
+              {receivedProductData?.productData.productDescription}
             </div>
           </div>
           <div>
             <div className="text-sm lg:text-base font-medium mt-5 lg:mt-7">
               <span className="text-[#8b96a5]">Price: </span>
-              <span className="text-[#505050] ml-1">Negotiable</span>
+              <span className="text-[#505050] ml-1">
+                {receivedProductData?.productData.priceType}
+              </span>
             </div>
           </div>
           <hr className="my-3 lg:my-5" />
           <div>
             <div className="text-sm lg:text-base font-medium mt-3 lg:mt-5">
               <span className="text-[#8b96a5]">Type: </span>
-              <span className="text-[#505050] ml-1">Desktop</span>
+              <span className="text-[#505050] ml-1">
+                {receivedProductData?.productData.productCategory}
+              </span>
             </div>
           </div>
           <div>
             <div className="text-sm lg:text-base font-medium mt-3 lg:mt-5">
               <span className="text-[#8b96a5]">Material: </span>
-              <span className="text-[#505050] ml-1">Negotiable</span>
+              <span className="text-[#505050] ml-1">Fine</span>
             </div>
           </div>
           <div>
             <div className="text-sm lg:text-base font-medium mt-3 lg:mt-5">
               <span className="text-[#8b96a5]">Price: </span>
-              <span className="text-[#505050] ml-1">Negotiable</span>
+              <span className="text-[#505050] ml-1">
+                {receivedProductData?.productData.price}
+              </span>
             </div>
           </div>
           <hr className="my-3 lg:my-5" />

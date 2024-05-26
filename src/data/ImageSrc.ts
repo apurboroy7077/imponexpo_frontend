@@ -11,6 +11,9 @@ const SEARCH_ICON_BLACK_SRC =
 const MESSI_IMAGE_SRC = "/images/messi.jpg";
 const MULTIPLE_USERS_ICON_BLACK_SRC = "/icons/sector-3/users-solid.svg";
 const MULTIPLE_USERS_ICON_WHITE_SRC = "/icons/sector-3/users-solid-white.svg";
+const MESSAGE_ICON_BLUE_SRC = "/icons/message.svg";
+const SHARE_ICON_BLUE_SRC = "/icons/share.svg";
+const BOOKMARK_ICON_BLUE_SRC = "/icons/bookmark.svg";
 export {
   DEMO_LOGO_SRC,
   BARS_ICON_SRC,
@@ -24,4 +27,7 @@ export {
   MESSI_IMAGE_SRC,
   MULTIPLE_USERS_ICON_BLACK_SRC,
   MULTIPLE_USERS_ICON_WHITE_SRC,
+  MESSAGE_ICON_BLUE_SRC,
+  SHARE_ICON_BLUE_SRC,
+  BOOKMARK_ICON_BLUE_SRC,
 };

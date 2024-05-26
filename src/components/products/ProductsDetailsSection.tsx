@@ -1,7 +1,17 @@
 import React from "react";
 import TheSection from "../TheSection";
+import { receivedProductDataType } from "@/configs/types/receivedProductType";
+import {
+  BOOKMARK_ICON_BLUE_SRC,
+  MESSAGE_ICON_BLUE_SRC,
+  SHARE_ICON_BLUE_SRC,
+} from "@/data/ImageSrc";
+type propsType = {
+  productData: null | receivedProductDataType;
+};
+const ProductsDetailsSection = (props: propsType) => {
+  const receivedProductData = props.productData;
 
-const ProductsDetailsSection = () => {
   return (
     <section>
       <div className=" px-2 py-5 lg:py-7   flex items-center justify-center">
@@ -14,7 +24,11 @@ const ProductsDetailsSection = () => {
                     {Array.from({ length: 4 }).map(() => {
                       return (
                         <div key={Math.random().toString()}>
-                          <img className="" src="/images/tv.png" alt="" />
+                          <img
+                            className=""
+                            src={receivedProductData?.productData.mainImageUrl}
+                            alt=""
+                          />
                         </div>
                       );
                     })}
@@ -41,7 +55,10 @@ const ProductsDetailsSection = () => {
                           />
                         </div>
                         <div>
-                          <img src="/images/tv.png" alt="" />
+                          <img
+                            src={receivedProductData?.productData.mainImageUrl}
+                            alt=""
+                          />
                         </div>
                         <div>
                           <img
@@ -55,26 +72,66 @@ const ProductsDetailsSection = () => {
                   </div>
                   <div>
                     <div className="flex px-2 lg:px-10 justify-between mt-3">
-                      {Array.from({ length: 4 }).map(() => {
-                        return (
-                          <div key={Math.random().toString()}>
-                            <div className="flex flex-col gap-1 items-center justify-center">
-                              <div>
-                                <img
-                                  className="w-[1.1rem]"
-                                  src="/icons/love.svg"
-                                  alt=""
-                                />
-                              </div>
-                              <div>
-                                <div className="text-xs text-[#676767]">
-                                  9200
-                                </div>
-                              </div>
+                      <div>
+                        <div className="flex flex-col gap-1 items-center justify-center">
+                          <div>
+                            <img
+                              className="w-[1.1rem]"
+                              src="/icons/love.svg"
+                              alt=""
+                            />
+                          </div>
+                          <div>
+                            <div className="text-xs text-[#676767]">
+                              {receivedProductData?.totalLikes}
                             </div>
                           </div>
-                        );
-                      })}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="flex flex-col gap-1 items-center justify-center">
+                          <div>
+                            <img
+                              className="w-[1.1rem]"
+                              src={MESSAGE_ICON_BLUE_SRC}
+                              alt=""
+                            />
+                          </div>
+                          <div>
+                            <div className="text-xs text-[#676767]">
+                              {receivedProductData?.totalComments}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="flex flex-col gap-1 items-center justify-center">
+                          <div>
+                            <img
+                              className="w-[1.1rem]"
+                              src={SHARE_ICON_BLUE_SRC}
+                              alt=""
+                            />
+                          </div>
+                          <div>
+                            <div className="text-xs text-[#676767]"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="flex flex-col gap-1 items-center justify-center">
+                          <div>
+                            <img
+                              className="w-[1.1rem]"
+                              src={BOOKMARK_ICON_BLUE_SRC}
+                              alt=""
+                            />
+                          </div>
+                          <div>
+                            <div className="text-xs text-[#676767]"></div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div>
@@ -114,28 +171,26 @@ const ProductsDetailsSection = () => {
               <div className="border-[2px] bg-[#fff7f5] px-2 lg:px-5 py-5 lg:py-7 rounded-lg">
                 <div>
                   <div className="text-sm lg:text-xl font-bold">
-                    Quantum Forge Elite Desktop
+                    {receivedProductData?.productData.productName}
                   </div>
                 </div>
                 <div>
                   <div className="text-xs lg:text-base mt-2 lg:mt-5 text-[#696969]">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Eum consequuntur expedita neque corrupti ratione assumenda
-                    sint, recusandae placeat pariatur tenetur!
+                    {receivedProductData?.productData.productDescription}
                   </div>
                 </div>
                 <div>
                   <div className="text-[#4880ff] font-medium text-sm lg:text-base mt-3 lg:mt-5">
-                    #Apple #Ipode #FreedomSound #SeamlessConnectivity
+                    {receivedProductData?.productData.productHashtags}
                   </div>
                 </div>
                 <div>
                   <div className="mt-3 lg:mt-5">
                     {[
-                      { Type: "Television" },
-                      { Age: "All Ages" },
-                      { Function: "Experience" },
-                      { Style: "Wireless and With Wire" },
+                      {
+                        Type: `${receivedProductData?.productData.productCategory}`,
+                      },
+                      { Age: `${receivedProductData?.productData.usersAge}` },
                     ].map((data) => {
                       const typeName = Object.keys(
                         data
@@ -159,10 +214,12 @@ const ProductsDetailsSection = () => {
                 <div>
                   <div className="mt-3">
                     <span className="text-[#ff603d] text-lg font-bold">
-                      $49.99 - 129.99
+                      ${receivedProductData?.productData.price}
                     </span>
                     <span className=" text-[#696969] text-base lg:ml-2">
-                      (min orders: 20 pcs)
+                      (min orders:{" "}
+                      {receivedProductData?.productData.minimumQuantityToOrder}{" "}
+                      pcs)
                     </span>
                   </div>
                 </div>

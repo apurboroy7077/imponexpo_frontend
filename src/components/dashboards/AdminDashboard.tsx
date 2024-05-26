@@ -207,8 +207,13 @@ const AdminDashboard = () => {
       });
   };
   const handleGetRandomProducts2 = () => {
+    const serial = 1;
+    const dataForServer = { serial };
     axios
-      .post(`${serverURL}${SUB_ADDRESS_OF_GETTING_RANDOM_PRODUCTS_2_API}`, {})
+      .post(
+        `${serverURL}${SUB_ADDRESS_OF_GETTING_RANDOM_PRODUCTS_2_API}`,
+        dataForServer
+      )
       .then((response) => {
         console.log(response);
       })

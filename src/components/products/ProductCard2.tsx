@@ -133,7 +133,6 @@ const ProductsCard2 = (props: propsType) => {
     axios
       .post(`${serverURL}${SUB_ADDRESS_OF_LIKE_SOMETHING_API}`, dataForServer)
       .then((response) => {
-        console.log(response);
         checkLikedOrNot();
         getTotalNumberOfLikes();
         toast("Liked");
@@ -156,7 +155,6 @@ const ProductsCard2 = (props: propsType) => {
         dataForServer
       )
       .then((response) => {
-        console.log(response);
         checkLikedOrNot();
         getTotalNumberOfLikes();
         toast("Disliked");
@@ -178,8 +176,7 @@ const ProductsCard2 = (props: propsType) => {
       authenticationToken: authenticationToken,
       ar7idOfTheSubjectWhichWillBeFollowed: sellerDetails?.ar7id,
     };
-    console.log(sellerDetails);
-    console.log("Hello World");
+
     axios
       .post(`${serverURL}${SUB_ADDRESS_OF_FOLLOW_SOMEONE_API}`, dataForServer)
       .then((response) => {
@@ -207,7 +204,7 @@ const ProductsCard2 = (props: propsType) => {
       )
       .then((response) => {
         const followingStatus = response.data.followingStatus;
-        console.log(followingStatus);
+
         setFollowingSellerStatus(followingStatus);
       })
       .catch((error) => {

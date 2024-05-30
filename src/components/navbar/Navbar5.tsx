@@ -58,12 +58,17 @@ const Navbar5 = () => {
     "NOT_STICKY" as stickyStatusType
   );
   const searchInputRef = useRef(null);
+  const typenWordsInSearchBox = usePopup(
+    (state) => state.typenWordsInSearchBox
+  );
   const setTypenWordsInSearchBox = usePopup(
     (state) => state.setTypenWordsInSearchBox
   );
+
   const setSearchInputRef = usePopup((state) => state.setSearchInputRef);
   const { listeningStatus, spokenText, startListening, stopListening } =
     useMySpeechRecognitionHook();
+
   const handleOpenMenuList = () => {
     setIsMenuOpen("OPENED");
   };
@@ -90,6 +95,16 @@ const Navbar5 = () => {
     handleLoseFocusFromSearchBox: () => {
       openPopup("NO_POPUP");
     },
+    handleClickOnMicroPhone: () => {
+      startListening();
+      console.log("Clicked On Microphone");
+    },
+    handleSearchTheSpokenWord: () => {
+      if (spokenText) {
+        openPopup("SEARCH_RESULT_POPUP");
+        setTypenWordsInSearchBox(spokenText);
+      }
+    },
   };
   useEffect(() => {
     setScreenWidth(window.innerWidth);
@@ -103,6 +118,9 @@ const Navbar5 = () => {
   useEffect(() => {
     setSearchInputRef(searchInputRef);
   }, []);
+  useEffect(() => {
+    moreFunctions.handleSearchTheSpokenWord();
+  }, [spokenText]);
   return (
     <>
       {stickyStatus === "STICKY" && (
@@ -252,6 +270,7 @@ const Navbar5 = () => {
                                     className="w-[7rem] lg:w-[13rem]  mx-2 outline-none border-none"
                                     type="text"
                                     placeholder="Got a product to Source? Imponexpo it Here."
+                                    value={typenWordsInSearchBox}
                                     ref={searchInputRef}
                                     onChange={
                                       moreFunctions.handleTypingOnSearchBox
@@ -266,11 +285,24 @@ const Navbar5 = () => {
                                   />
                                 </div>
                                 <div>
-                                  <img
-                                    className="w-[1.2rem] ml-3"
-                                    src={MICROPHONE_ICON_SRC}
-                                    alt=""
-                                  />
+                                  {listeningStatus === "NOT_LISTENING" && (
+                                    <img
+                                      className="w-[1.2rem] ml-3 active:scale-[0.95]"
+                                      src={MICROPHONE_ICON_SRC}
+                                      alt=""
+                                      onClick={
+                                        moreFunctions.handleClickOnMicroPhone
+                                      }
+                                    />
+                                  )}
+                                  {listeningStatus === "LISTENING" && (
+                                    <img
+                                      className="w-[1.2rem] ml-3 active:scale-[0.95] animate-pulse"
+                                      src={MICROPHONE_ICON_SRC}
+                                      alt=""
+                                      onClick={stopListening}
+                                    />
+                                  )}
                                 </div>
                                 <div>
                                   <button className=" text-sm ml-3 h-[3rem] bg-[#1d5ec9] text-[white] rounded-tr-md rounded-br-md px-2">

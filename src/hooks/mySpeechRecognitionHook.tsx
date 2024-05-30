@@ -16,6 +16,8 @@ const useMySpeechRecognitionHook = () => {
     setupSpeechRecognition: () => {
       if ("webkitSpeechRecognition" in window) {
         const recognition_ = new webkitSpeechRecognition();
+        recognition_.lang = "en-US";
+        recognition_.interimResults = true;
         recognition_.onresult = (e: SpeechRecognitionEvent) => {
           const spokenText_ = e.results[0][0].transcript;
           setSpokenText(spokenText_);
@@ -37,6 +39,9 @@ const useMySpeechRecognitionHook = () => {
       }
       mySpeechRecognition?.start();
       setListeningStatus("LISTENING");
+      setTimeout(() => {
+        myFunctions.stopListening();
+      }, 7000);
     },
     stopListening: () => {
       mySpeechRecognition?.stop();

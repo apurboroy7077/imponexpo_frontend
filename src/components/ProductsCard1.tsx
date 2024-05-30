@@ -127,7 +127,6 @@ const ProductsCard1 = (props: propsType) => {
     axios
       .post(`${serverURL}${SUB_ADDRESS_OF_LIKE_SOMETHING_API}`, dataForServer)
       .then((response) => {
-        console.log(response);
         checkLikedOrNot();
         getTotalNumberOfLikes();
         toast("Liked");
@@ -199,7 +198,7 @@ const ProductsCard1 = (props: propsType) => {
       )
       .then((response) => {
         const followingStatus = response.data.followingStatus;
-        console.log(followingStatus);
+
         setFollowingSellerStatus(followingStatus);
       })
       .catch((error) => {

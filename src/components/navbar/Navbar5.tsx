@@ -19,6 +19,9 @@ import Link from "next/link";
 
 import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
+import SearchPopup from "../modals/SearchPopup";
+import SearchResults from "./SearchResults";
+import useMySpeechRecognitionHook from "@/hooks/mySpeechRecognitionHook";
 const linkData1 = [
   {
     name: "Dropshipping",
@@ -50,9 +53,17 @@ const Navbar5 = () => {
   const loginStatus = useUser((state) => state.loginStatus);
   const loggedUserDetails = useUser((state) => state.userData);
   const openPopup = usePopup((state) => state.openPopup);
+  const currentlyOpenedPopup = usePopup((state) => state.currentlyOpenedPopup);
   const [stickyStatus, setSticlyStatus] = useState(
     "NOT_STICKY" as stickyStatusType
   );
+  const searchInputRef = useRef(null);
+  const setTypenWordsInSearchBox = usePopup(
+    (state) => state.setTypenWordsInSearchBox
+  );
+  const setSearchInputRef = usePopup((state) => state.setSearchInputRef);
+  const { listeningStatus, spokenText, startListening, stopListening } =
+    useMySpeechRecognitionHook();
   const handleOpenMenuList = () => {
     setIsMenuOpen("OPENED");
   };
@@ -70,6 +81,16 @@ const Navbar5 = () => {
   const handleResize = () => {
     setScreenWidth(window.innerWidth);
   };
+  const moreFunctions = {
+    handleTypingOnSearchBox: (e: React.ChangeEvent<HTMLInputElement>) => {
+      const typenWords = e.target.value;
+      openPopup("SEARCH_RESULT_POPUP");
+      setTypenWordsInSearchBox(typenWords);
+    },
+    handleLoseFocusFromSearchBox: () => {
+      openPopup("NO_POPUP");
+    },
+  };
   useEffect(() => {
     setScreenWidth(window.innerWidth);
     window.addEventListener("scroll", handleScroll);
@@ -79,6 +100,9 @@ const Navbar5 = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+  useEffect(() => {
+    setSearchInputRef(searchInputRef);
+  }, []);
   return (
     <>
       {stickyStatus === "STICKY" && (
@@ -87,7 +111,7 @@ const Navbar5 = () => {
         </div>
       )}
       <nav
-        className={` z-30  transition-all  top-0 ${
+        className={` z-30  transition-all  top-0 relative ${
           stickyStatus === "NOT_STICKY" ? "block" : "sticky"
         }`}
       >
@@ -228,6 +252,10 @@ const Navbar5 = () => {
                                     className="w-[7rem] lg:w-[13rem]  mx-2 outline-none border-none"
                                     type="text"
                                     placeholder="Got a product to Source? Imponexpo it Here."
+                                    ref={searchInputRef}
+                                    onChange={
+                                      moreFunctions.handleTypingOnSearchBox
+                                    }
                                   />
                                 </div>
                                 <div>
@@ -354,6 +382,7 @@ const Navbar5 = () => {
             </div>
           </div>
         </div>
+        {currentlyOpenedPopup === "SEARCH_RESULT_POPUP" && <SearchResults />}
       </nav>
     </>
   );

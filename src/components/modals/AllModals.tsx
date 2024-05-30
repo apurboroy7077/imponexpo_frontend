@@ -3,6 +3,7 @@ import React from "react";
 import LogOutPopupModal from "./LogOutPopupModal";
 import { usePopup } from "@/configs/zustand/zustandPopup";
 import ProductCommentPopupModal from "./ProductCommentPopupModal";
+import SearchPopup from "./SearchPopup";
 
 const AllModals = () => {
   const currentlyOpenedPopup = usePopup((state) => state.currentlyOpenedPopup);
@@ -13,6 +14,7 @@ const AllModals = () => {
       {currentlyOpenedPopup === "PRODUCT_COMMENTS_POPUP" && (
         <ProductCommentPopupModal />
       )}
+      {/* {<SearchPopup />} */}
     </>
   );
 };

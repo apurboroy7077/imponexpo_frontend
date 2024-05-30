@@ -13,10 +13,28 @@ import {
   SUB_ADDRESS_OF_UNBANNING_SOMEONE_API,
   serverURL,
 } from "@/data/EnvironmentVariables";
+import useMySpeechRecognitionHook from "@/hooks/mySpeechRecognitionHook";
+import mySpeechRecognitionHook from "@/hooks/mySpeechRecognitionHook";
+
 import axios from "axios";
 import React from "react";
 
 const AdminDashboard = () => {
+  // const {
+  //   text,
+  //   startListening,
+  //   stopListening,
+  //   isListening,
+  //   hasRecognitionSupport,
+  // } = useSpeechRecognitionHook();
+  const {
+    spokenText,
+    startListening,
+    stopListening,
+    supportStatus,
+    listeningStatus,
+  } = useMySpeechRecognitionHook();
+  console.log(spokenText);
   const makeSomeoneAdminHandler = () => {
     const IMPONEXPO_SUPERUSER_KEY = "imponexpo-superuser-key-123";
     const ar7idOfTheUserWhoWillBeAdmin =
@@ -221,6 +239,10 @@ const AdminDashboard = () => {
         console.log(error);
       });
   };
+  const myFunctions = {
+    handleVoiceSearch: () => {},
+  };
+
   return (
     <div className="p-10">
       <button
@@ -282,6 +304,21 @@ const AdminDashboard = () => {
         onClick={handleGetRandomProducts2}
       >
         Get Random Products 2
+      </button>
+      <button
+        className=" m-5 border-[2px] bg-[green] text-[white] px-3 py-1 rounded-lg outline-none border-none active:scale-[0.95]"
+        onClick={startListening}
+      >
+        Start Listening
+      </button>
+      {listeningStatus === "LISTENING" && (
+        <div>Your Browser is Currently Listening</div>
+      )}
+      <button
+        className=" m-5 border-[2px] bg-[red] text-[white] px-3 py-1 rounded-lg outline-none border-none active:scale-[0.95]"
+        onClick={stopListening}
+      >
+        Stop Listening
       </button>
     </div>
   );

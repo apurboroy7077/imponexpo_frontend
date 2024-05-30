@@ -1,8 +1,14 @@
 "use client";
 
+import { SUB_ADDRESS_OF_GETTING_USERS_DATA_FOR_ADMIN_API } from "@/data/ApiAddresses";
+import {
+  KEYNAME_OF_AUTHENTICATION_TOKEN_IN_LOCALSTORAGE,
+  serverURL,
+} from "@/data/EnvironmentVariables";
 import { MESSI_IMAGE_SRC, SEARCH_ICON_BLACK_SRC } from "@/data/ImageSrc";
+import axios from "axios";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 const dummyData = [
   {
     name: "Jesus Weiss",
@@ -43,6 +49,30 @@ const dummyData = [
 
 const ManageUsers = () => {
   const [test, setTest] = useState("test");
+  const [pageNo, setPageNo] = useState(1);
+  const dataForServer = {};
+  const myFunctions = {
+    getUsersData: () => {
+      const authenticationToken = localStorage.getItem(
+        KEYNAME_OF_AUTHENTICATION_TOKEN_IN_LOCALSTORAGE
+      );
+      const dataForServer = { authenticationToken, pageNo };
+      axios
+        .post(
+          `${serverURL}${SUB_ADDRESS_OF_GETTING_USERS_DATA_FOR_ADMIN_API}`,
+          dataForServer
+        )
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  };
+  useEffect(() => {
+    myFunctions.getUsersData();
+  }, []);
   return (
     <>
       <div className="bg-[#f1f5f9] p-4 lg:px-12 lg:py-10 flex justify-center min-h-full  max-h-fit">
@@ -106,42 +136,44 @@ const ManageUsers = () => {
                   {dummyData.map((data) => {
                     return (
                       <div key={Math.random().toString()}>
-                        <div className="border-[1px] shadow-md px-2 lg:px-3 py-1 lg:py-3 lg:py-5 rounded  ">
-                          <div>
-                            <div className="flex items-center justify-center">
-                              <div className="w-[4rem] lg:w-[6rem] h-[4rem] lg:h-[6rem]">
-                                <img
-                                  className="w-full h-full object-cover object-center rounded-full"
-                                  src={MESSI_IMAGE_SRC}
-                                  alt=""
-                                />
+                        <Link href={`/users-details/id`}>
+                          <div className="border-[1px] shadow-md px-2 lg:px-3 py-1 lg:py-3 lg:py-5 rounded cursor-pointer hover:shadow-lg">
+                            <div>
+                              <div className="flex items-center justify-center">
+                                <div className="w-[4rem] lg:w-[6rem] h-[4rem] lg:h-[6rem]">
+                                  <img
+                                    className="w-full h-full object-cover object-center rounded-full"
+                                    src={MESSI_IMAGE_SRC}
+                                    alt=""
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                            <div>
+                              <div className=" mt-3 lg:mt-5 text-sm lg:text-lg font-medium text-center">
+                                {data.name}
+                              </div>
+                            </div>
+                            <div>
+                              <div className=" mt-1 lg:mt-2 text-xs lg:text-base text-center font-medium  opacity-[0.6]">
+                                {data.address}
+                              </div>
+                            </div>
+                            <div>
+                              <div className=" mt-1 lg:mt-4 flex flex-wrap justify-center items-center gap-1 lg:gap-3">
+                                {data.sellingTags.map((data) => {
+                                  return (
+                                    <div key={Math.random().toString()}>
+                                      <button className="text-xs lg:text-sm border-[1px] border-[] px-1 lg:px-3 py-1 lg:py-2 rounded font-medium opacity-[0.7]">
+                                        {data}
+                                      </button>
+                                    </div>
+                                  );
+                                })}
                               </div>
                             </div>
                           </div>
-                          <div>
-                            <div className=" mt-3 lg:mt-5 text-sm lg:text-lg font-medium text-center">
-                              {data.name}
-                            </div>
-                          </div>
-                          <div>
-                            <div className=" mt-1 lg:mt-2 text-xs lg:text-base text-center font-medium  opacity-[0.6]">
-                              {data.address}
-                            </div>
-                          </div>
-                          <div>
-                            <div className=" mt-1 lg:mt-4 flex flex-wrap justify-center items-center gap-1 lg:gap-3">
-                              {data.sellingTags.map((data) => {
-                                return (
-                                  <div key={Math.random().toString()}>
-                                    <button className="text-xs lg:text-sm border-[1px] border-[] px-1 lg:px-3 py-1 lg:py-2 rounded font-medium opacity-[0.7]">
-                                      {data}
-                                    </button>
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          </div>
-                        </div>
+                        </Link>
                       </div>
                     );
                   })}
